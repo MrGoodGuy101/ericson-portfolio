@@ -501,6 +501,33 @@ header .navbar ul li a:hover {
 .project .heading span {
   color: #fc8c05;
 }
+.project .button-group{
+  display: flex;
+  flex-wrap: wrap;
+  gap:1rem;
+  margin: 2rem auto;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+}
+.project .button-group .btn{
+  outline: none;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.project .button-group .btn:hover{
+  background-color: #fff;
+  color: #000;
+}
+.project .button-group .btn.is-checked{
+  background-color: #fff;
+  color: #000;
+}
 .project .box-container {
   display: flex;
   flex-wrap: wrap;
@@ -519,6 +546,7 @@ header .navbar ul li a:hover {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  object-position: top;
 }
 .project .box-container .box .content {
   height: 100%;

@@ -113,9 +113,10 @@ function showSkills(skills) {
 function showProjects(projects) {
     let projectsContainer = document.querySelector("#projects .box-container");
     let projectHTML = "";
-    projects.slice(0, 10).filter(project => project.category != "android").forEach(project => {
+
+    projects.forEach(project => {
         projectHTML += `
-        <div class="box">
+        <div class="box ${project.category}">
             <img draggable="false" src="/assets/images/projects/${project.image}.png" alt="project" />
             <div class="content">
                 <div class="tag">
@@ -123,34 +124,60 @@ function showProjects(projects) {
                 </div>
                 <div class="desc">
                     <p>${project.desc}</p>
-                    <div class="btns">
+                    <!-- <div class="btns">
                         <a href="${project.links.view}" class="btn" target="_blank">View <i class="fas fa-eye"></i></a>
                         <a href="${project.links.code}" class="btn" target="_blank">Code <i class="fas fa-code"></i></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-        </div>`
+        </div>`;
     });
+
     projectsContainer.innerHTML = projectHTML;
 
-    // <!-- tilt js effect starts -->
+    // Initialize tilt js effect
     VanillaTilt.init(document.querySelectorAll(".tilt"), {
         max: 15,
     });
-    // <!-- tilt js effect ends -->
 
-    /* ===== SCROLL REVEAL ANIMATION ===== */
-    const srtop = ScrollReveal({
+    // Initialize Scroll Reveal Animation
+    const sr = ScrollReveal({
         origin: 'bottom',
         distance: '80px',
         duration: 1000,
-        reset: false
+        reset: false,
     });
 
-    /* SCROLL PROJECTS */
-    srtop.reveal('.project .box', { interval: 200 });
-
+    // Reveal the project boxes
+    sr.reveal('.project .box', { interval: 200 });
 }
+
+// Function to handle filtering based on category
+function filterProjects(category) {
+    const allBoxes = document.querySelectorAll('.box');
+
+    allBoxes.forEach(box => {
+        const boxCategory = box.classList.contains(category) || category === '*';
+        box.style.display = boxCategory ? 'block' : 'none';
+    });
+
+    // Toggle the "is-checked" class on filter buttons
+    filterButtons.forEach(button => {
+        button.classList.remove('is-checked');
+        if (button.getAttribute('data-filter') === category) {
+            button.classList.add('is-checked');
+        }
+    });
+}
+
+// Event listener for filter buttons
+const filterButtons = document.querySelectorAll('#filters .btn');
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const selectedCategory = button.getAttribute('data-filter');
+        filterProjects(selectedCategory);
+    });
+});
 
 fetchData().then(data => {
     showSkills(data);
