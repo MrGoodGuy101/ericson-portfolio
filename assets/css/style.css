@@ -309,6 +309,14 @@ header .navbar ul li a:hover {
 /* social icons end */
 
 /* hero media queries starts*/
+@media (max-width: 667px){
+  .home .content{
+    top: 50px;
+  }
+  .home .image img {
+    display: none;
+  }
+}
 @media (max-width: 450px) {
   .home .btn {
     margin: 4rem 0;
@@ -316,8 +324,11 @@ header .navbar ul li a:hover {
   .socials {
     margin-top: 12rem;
   }
+  .home .content{
+    top: 20px;
+  }
   .home .image img {
-    margin-top: -12rem;
+    display: none;
   }
   .home .content p {
     font-size: 2.2rem;
@@ -350,9 +361,6 @@ header .navbar ul li a:hover {
   height: auto;
   border-radius: 5%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
-  mix-blend-mode: luminosity;
-  transition: 0.3s;
-  cursor: pointer;
 }
 .about .row .image img:hover {
   mix-blend-mode: normal;
@@ -677,7 +685,7 @@ form .form-group {
   flex-direction: column;
   justify-content: center;
 }
-.form-group .field {
+form .form-group .field {
   height: 50px;
   display: flex;
   position: relative;
